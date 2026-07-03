@@ -581,7 +581,12 @@ def GenerateNonAbOtaPackage(target_file, output_file, source_file=None):
   # Non-A/B OTAs rely on /cache partition to store temporary files.
   cache_size = OPTIONS.info_dict.get("cache_size")
   if cache_size is None:
-    logger.warning("--- can't determine the cache partition size ---")
+    # No cache partition (repurposed as /metadata), so misc_info has no cache_size.
+    # A full non-A/B OTA never stashes to /cache; this only bounds transfer
+    # chunking in blockimgdiff, so a nominal default keeps the package cache-free.
+    cache_size = 256 * 1024 * 1024
+    logger.warning(
+        "--- cache_size not set; using cache-free default %d ---", cache_size)
   OPTIONS.cache_size = cache_size
 
   if OPTIONS.extra_script is not None:
