@@ -319,6 +319,8 @@ endif
 ifneq ($(ENABLE_VENDOR_RIL_SERVICE), true)
   $(call soong_config_set_bool,ril,use_aosp_rild,true)
 endif
+# Vendor RILs built before 2019 expect nanopb's 8-bit pb_field_t descriptors
+$(call soong_config_set_bool,ril,legacy_nanopb,$(if $(filter true,$(BOARD_RIL_USES_LEGACY_NANOPB)),true,false))
 
 # Export target_board_platform to soong for hardware/google/graphics/common/libmemtrack:memtrack.$(TARGET_BOARD_PLATFORM)
 $(call soong_config_set,ANDROID,target_board_platform,$(TARGET_BOARD_PLATFORM))
