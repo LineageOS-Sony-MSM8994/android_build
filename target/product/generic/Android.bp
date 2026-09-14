@@ -567,7 +567,6 @@ system_image_defaults {
         "bu",
         "bugreport",
         "bugreportz",
-        "cameraserver",
         "casefolding_remover",
         "cgroups.json",
         "cmd",
@@ -1016,6 +1015,7 @@ system_image_defaults {
         },
         prefer32: {
             deps: [
+                "cameraserver",
                 "drmserver", // media_system
                 "mediaserver", // base_system
             ],
