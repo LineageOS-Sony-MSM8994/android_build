@@ -557,7 +557,6 @@ system_image_defaults {
         "bu",
         "bugreport",
         "bugreportz",
-        "cameraserver",
         "cgroups.json",
         "cmd",
         "content",
@@ -944,6 +943,7 @@ system_image_defaults {
         },
         prefer32: {
             deps: [
+                "cameraserver",
                 "drmserver", // media_system
                 "mediaserver", // base_system
             ],
